@@ -1,5 +1,6 @@
 val http4kVersion = "3.154.0"
 val arrowVersion = "0.9.0"
+val toothpickVersion = "2.1.0"
 
 plugins {
     id("org.jetbrains.kotlin.jvm").version("1.3.21")
@@ -25,6 +26,9 @@ dependencies {
     kapt("io.arrow-kt:arrow-meta:$arrowVersion")
 
     compile("io.github.config4k:config4k:0.4.1")
+
+    implementation("com.github.stephanenicolas.toothpick:toothpick-runtime:$toothpickVersion")
+    kapt("com.github.stephanenicolas.toothpick:toothpick-compiler:$toothpickVersion")
 }
 
 application {
