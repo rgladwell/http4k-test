@@ -1,11 +1,14 @@
 package me.gladwell.http4k
 
-import toothpick.config.Module
+import dagger.Module
+import dagger.Provides
 
-internal object SimpleModule : Module() {
+@Module
+internal object SimpleModule {
 
-    init {
-        bind(MessageFactory::class.java).toInstance(GreetingsMessageFactory)
+    @Provides
+    fun provideGreetingsFactory(): MessageFactory {
+        return GreetingsMessageFactory
     }
 
 }

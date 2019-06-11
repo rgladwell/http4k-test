@@ -11,7 +11,6 @@ import org.http4k.server.Jetty
 import org.http4k.server.asServer
 import org.http4k.core.with
 import org.http4k.lens.string
-import toothpick.Toothpick
 
 import me.gladwell.http4k.message.format.*
 
@@ -32,9 +31,10 @@ class Api @Inject constructor(messages: MessageFactory) {
 
         fun run() {
             val port = ConfigFactory.load().extract<Int>("server.port")
-            val scope = Toothpick.openScope(this)
-            scope.installModules(SimpleModule)
-            val api = scope.getInstance(Api::class.java)
+            val api = DaggerApiFactory.builder()
+                .simpleModule(SimpleModule)
+                .build()
+                .api();
             api.app.asServer(Jetty(port)).start()
         }
     }
