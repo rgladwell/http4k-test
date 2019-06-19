@@ -39,11 +39,11 @@ dependencies {
     compile("com.google.dagger:dagger:$daggerVersion")
     kapt("com.google.dagger:dagger-compiler:$daggerVersion")
 
-    // spek
+    // testing
     testImplementation("org.spekframework.spek2:spek-dsl-jvm:$spekVersion")
     testRuntimeOnly("org.spekframework.spek2:spek-runner-junit5:$spekVersion")
     testRuntimeOnly("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
-    testImplementation("com.natpryce:hamkrest:1.7.0.0")
+    testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.17")
 }
 
 application {
