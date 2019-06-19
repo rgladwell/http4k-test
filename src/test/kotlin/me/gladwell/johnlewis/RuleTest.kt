@@ -1,20 +1,20 @@
 package me.gladwell.johnlewis
 
-import kotlin.test.Test
+import org.spekframework.spek2.Spek
 import kotlin.test.assertTrue
 
-class RuleTest {
+object RuleTests: Spek({
 
-    @Test
-    fun `verify validation succeeds for numeric ID`() {
-        val rule = BoostRule(ProductId("123"))
-        assertTrue(BoostRule.validate(rule).isValid)
+    group("validation") {
+        test("succeeds for numeric ID") {
+            val rule = BoostRule(ProductId("123"))
+            assertTrue(BoostRule.validate(rule).isValid)
+        }
+
+        test("fails for non-numeric ID") {
+            val rule = BoostRule(ProductId("not-an-id"))
+            assertTrue(BoostRule.validate(rule).isInvalid)
+        }
     }
 
-    @Test
-    fun `verify validation fails for string ID`() {
-        val rule = BoostRule(ProductId("not-an-id"))
-        assertTrue(BoostRule.validate(rule).isInvalid)
-    }
-
-}
+})
