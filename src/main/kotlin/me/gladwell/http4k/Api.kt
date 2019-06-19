@@ -3,28 +3,25 @@ package me.gladwell.http4k
 import com.typesafe.config.ConfigFactory
 import io.github.config4k.*
 import org.http4k.core.Body
-import org.http4k.core.ContentType.Companion.APPLICATION_JSON
 import org.http4k.core.Request
 import org.http4k.core.Response
 import org.http4k.core.Status.Companion.OK
 import org.http4k.server.Jetty
 import org.http4k.server.asServer
 import org.http4k.core.with
-import org.http4k.lens.string
+import org.http4k.format.Jackson.auto
 
-import me.gladwell.http4k.message.format.*
+import me.gladwell.johnlewis.*
 
 import javax.inject.Inject
 
-class Api @Inject constructor(messages: MessageFactory) {
+class Api @Inject constructor() {
+
+    val page = ProductListingPage(CategoryId("1"), listOf(BoostRule(ProductId("2"))))
 
     val app = { request: Request ->
-        val name = request.query("name")
-        val json = Message.format().run { json(messages.message(name)) }
-
-        val jsonBody = Body.string(APPLICATION_JSON).toLens()
-
-        Response(OK).with(jsonBody of json)
+        val jsonBody = Body.auto<ProductListingPage>().toLens()
+        Response(OK).with(jsonBody of page)
     }
 
     companion object {

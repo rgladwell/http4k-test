@@ -21,8 +21,10 @@ dependencies {
 
     compile("org.http4k:http4k-core:$http4kVersion")
     compile("org.http4k:http4k-server-jetty:$http4kVersion")
+    compile("org.http4k:http4k-format-jackson:$http4kVersion")
 
     compile("io.arrow-kt:arrow-core-extensions:$arrowVersion")
+    compile("io.arrow-kt:arrow-extras-data:$arrowVersion")
     kapt("io.arrow-kt:arrow-meta:$arrowVersion")
 
     compile("io.github.config4k:config4k:0.4.1")
